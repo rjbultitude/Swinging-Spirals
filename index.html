@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+	<title>Swinging spirals Sketch / P5.js</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<style>
+ 		/*fonts*/
+ 		@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
+
+ 		/*Container styles*/
+ 		body {
+ 			padding: 0;
+ 			margin: 0;
+ 			text-align: center;
+ 			width: 100%;
+ 			color: black;
+ 			font-family: 'Roboto Condensed', sans-serif;
+ 			font-weight: 400;
+ 		}
+ 		.info-box {
+ 			padding: 0.5em;
+ 			max-width: 50em;
+ 			margin: 0 auto;
+ 		}
+ 		#canvas-container {
+ 			margin-bottom: 1em;
+ 		}
+ 		#defaultCanvas {
+ 			display: inline-block;
+ 			width: 100% !important;
+ 			height: auto !important;
+ 			max-width: 800px;
+ 			max-height: 600px;
+ 		}
+ 		/*Type styles*/
+ 		h1 {
+ 			margin-bottom: 0.1em;
+ 			font-weight: 300;
+ 		}
+ 		h2 {
+ 			margin: 0.1em 0;
+ 			font-weight: 300;
+ 		}
+ 		/*Control styles*/
+ 		button {
+ 			padding: 0.5em 0.75em;
+ 			font-size: 1.15em;
+ 			font-family: 'Roboto Condensed', sans-serif;
+ 		}
+ 	</style>
+</head>
+
+<body>
+<div id="canvas-container">
+</div>
+<div class="controls">
+	<button id="add-spiral">
+		Add a Spiral
+	</button>
+	<button id="sub-spiral">
+		Remove a Spiral
+	</button>
+	<button id="add">
+		More swing
+	</button>
+	<button id="subtract">
+		Less swing
+	</button>
+</div>
+<div class="info-box">
+	<h1>Swinging spirals</h1>
+	<h2>Made with p5.js</h2>
+	<p>This canvas sketch generates faux-3D animated sprials whose swing amount can be adjusted.</p>
+	<p>Spirals can be added or removed using the additional controls.</p>
+</div>
+<script language="javascript" src="p5.min.js"></script>
+<script language="javascript" src="sketch.js"></script>
+</body>
