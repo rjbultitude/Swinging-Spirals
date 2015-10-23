@@ -6,7 +6,7 @@ var swing = 20;
 var noiseStart = 0.1;
 var numSpirals = 1;
 
-function Longline(xpos, ypos, radius, colour, amt) {
+function SpiralNode(xpos, ypos, radius, colour, amt) {
 	this.xpos = xpos;
 	this.ypos = ypos;
 	this.radius = radius;
@@ -14,13 +14,13 @@ function Longline(xpos, ypos, radius, colour, amt) {
 	this.colour = color(random(colour, 255), colour - 50, colour - 800, 255);
 }
 
-Longline.prototype.paint = function() {
+SpiralNode.prototype.paint = function() {
 	fill(this.colour);
 	noStroke();
 	ellipse(this.xpos, this.ypos, this.radius, this.radius);
 }
 
-Longline.prototype.update = function() {
+SpiralNode.prototype.update = function() {
 	var prevXpos = this.xpos;
 	var prevYpos = this.ypos;
 	var prevRadius = this.radius;
@@ -31,7 +31,7 @@ Longline.prototype.update = function() {
 	this.ypos = prevYpos + sin(angle) * this.amt/(swing/2);
 }
 
-function createLineArr(newOffset, newColourSeed, newRadAngle, newInnerRadius) {
+function createSpiralArr(newOffset, newColourSeed, newRadAngle, newInnerRadius) {
 
 	//Spiral logic
 	var innerRadius = newInnerRadius || 20;
@@ -52,8 +52,8 @@ function createLineArr(newOffset, newColourSeed, newRadAngle, newInnerRadius) {
 
 		var xpos = sin(rad) * innerRadius + (width/2);
 		var ypos = cos(rad) * innerRadius + (height/2) - offset * i/4;
-		var newLongline = new Longline(xpos, ypos, radius, colour, i);
-		circleArr.push(newLongline);
+		var newSpiralNode = new SpiralNode(xpos, ypos, radius, colour, i);
+		circleArr.push(newSpiralNode);
 	}
 }
 
@@ -65,7 +65,7 @@ var subSpiral = document.getElementById('sub-spiral');
 
 //add spiral
 addSpiral.addEventListener('click', function() {
-	createLineArr(random(20,30), random(50,100), random(12,24), random(10, 100));
+	createSpiralArr(random(20,30), random(50,100), random(12,24), random(10, 100));
 	numSpirals += 1;
 });
 
@@ -93,7 +93,7 @@ function setup() {
 	myCanvas = createCanvas(800,600);
 	myCanvas.parent('canvas-container');
 	background(0,0,0);
-	createLineArr();
+	createSpiralArr();
 }
 
 function draw() {
