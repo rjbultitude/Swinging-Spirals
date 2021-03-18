@@ -1,48 +1,48 @@
-var circleArr = [];
-var myCanvas;
-var num = 130;
-var twidth = 5;
-var swing = 20;
-var noiseStart = 0.1;
-var numSpirals = 1;
+const circleArr = [];
+let myCanvas;
+const num = 130;
+let swing = 20;
+let noiseStart = 0.1;
+let numSpirals = 1;
 
-function SpiralNode(xpos, ypos, radius, colour, amt) {
-	this.xpos = xpos;
-	this.ypos = ypos;
-	this.radius = radius;
-	this.amt = amt;
-	this.colour = color(random(colour, 255), colour - 50, colour - 800, 255);
-}
+class SpiralNode {
+	constructor(xpos, ypos, radius, colour, amt) {
+		this.xpos = xpos;
+		this.ypos = ypos;
+		this.radius = radius;
+		this.amt = amt;
+		this.colour = color(random(colour, 255), colour - 50, colour - 800, 255);
+	}
 
-SpiralNode.prototype.paint = function() {
-	fill(this.colour);
-	noStroke();
-	ellipse(this.xpos, this.ypos, this.radius, this.radius);
-}
+	paint() {
+		fill(this.colour);
+		noStroke();
+		ellipse(this.xpos, this.ypos, this.radius, this.radius);
+	}
 
-SpiralNode.prototype.update = function() {
-	var prevXpos = this.xpos;
-	var prevYpos = this.ypos;
-	var prevRadius = this.radius;
+	update() {
+		const prevXpos = this.xpos;
+		const prevYpos = this.ypos;
 
-	var angle = frameCount/50;
+		const angle = frameCount/50;
 
-	this.xpos = prevXpos + sin(angle) * this.amt/swing;
-	this.ypos = prevYpos + sin(angle) * this.amt/(swing/2);
+		this.xpos = prevXpos + sin(angle) * this.amt/swing;
+		this.ypos = prevYpos + sin(angle) * this.amt/(swing/2);
+	}
 }
 
 function createSpiralArr(newOffset, newColourSeed, newRadAngle, newInnerRadius) {
 
 	//Spiral logic
-	var innerRadius = newInnerRadius || 20;
-	var offset = newOffset || 10;
-	var radius = 5;
-	var rad = 0;
-	var radAngle = newRadAngle || 10;
+	let innerRadius = newInnerRadius || 20;
+	const offset = newOffset || 10;
+	let radius = 5;
+	let rad = 0;
+	const radAngle = newRadAngle || 10;
 	//colour
-	var colour = newColourSeed || 30;
-		
-	for (var i = 0; i < num; i++) {
+	let colour = newColourSeed || 30;
+
+	for (let i = 0; i < num; i++) {
 
 		innerRadius += 2;
 		radius += 0.2;
@@ -50,18 +50,18 @@ function createSpiralArr(newOffset, newColourSeed, newRadAngle, newInnerRadius) 
 		noiseStart += 0.1;
 		colour = 30 + noise(noiseStart) * 200;
 
-		var xpos = sin(rad) * innerRadius + (width/2);
-		var ypos = cos(rad) * innerRadius + (height/2) - offset * i/4;
-		var newSpiralNode = new SpiralNode(xpos, ypos, radius, colour, i);
+		const xpos = sin(rad) * innerRadius + (width/2);
+		const ypos = cos(rad) * innerRadius + (height/2) - offset * i/4;
+		const newSpiralNode = new SpiralNode(xpos, ypos, radius, colour, i);
 		circleArr.push(newSpiralNode);
 	}
 }
 
 //controls
-var addBtn = document.getElementById('add');
-var subBtn = document.getElementById('subtract');
-var addSpiral = document.getElementById('add-spiral');
-var subSpiral = document.getElementById('sub-spiral');
+const addBtn = document.getElementById('add');
+const subBtn = document.getElementById('subtract');
+const addSpiral = document.getElementById('add-spiral');
+const subSpiral = document.getElementById('sub-spiral');
 
 //add spiral
 addSpiral.addEventListener('click', function() {
@@ -71,7 +71,7 @@ addSpiral.addEventListener('click', function() {
 
 //remove spiral
 subSpiral.addEventListener('click', function() {
-	var segment = circleArr.length / num;
+	const segment = circleArr.length / num;
 	circleArr.splice(segment - 1, num);
 });
 
@@ -90,16 +90,18 @@ subBtn.addEventListener('click', function() {
 });
 
 function setup() {
-	myCanvas = createCanvas(800,600);
-	myCanvas.parent('canvas-container');
-	background(0,0,0);
-	createSpiralArr();
+  myCanvas = createCanvas(800,600);
+  myCanvas.parent('canvas-container');
+  background(0,0,0);
+  createSpiralArr();
 }
 
 function draw() {
-	background(0, 0, 0);
-	for (var i = 0; i < circleArr.length; i++) {
-		circleArr[i].paint();
-		circleArr[i].update();
-	}
+  background(0, 0, 0);
+  for (let i = 0; i < circleArr.length; i++) {
+    circleArr[i].paint();
+    circleArr[i].update();
+  }
 }
+
+
